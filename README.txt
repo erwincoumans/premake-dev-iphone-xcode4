@@ -45,7 +45,9 @@ I also change the way xcode id were generated to use only math.random calls and 
 -------
 
 
-You can download the precompiled Mac OSX premake4 binary in the download section.
+You can download the precompiled Mac OSX premake4 binary in the download section:
+https://github.com/erwincoumans/premake-dev-iphone-xcode4/downloads
+
 
 
 
