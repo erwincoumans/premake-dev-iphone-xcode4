@@ -742,12 +742,12 @@
 
 
 		if not cfg.flags.Symbols then
-	--		_p(4,'DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";')
+			--_p(4,'DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";')
 			xcode.PrintBuildSetting(4,'DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";', cfg)
 		end
 		
 		if cfg.kind ~= "StaticLib" and cfg.buildtarget.prefix ~= "" then
-	--		_p(4,'EXECUTABLE_PREFIX = %s;', cfg.buildtarget.prefix)
+			--_p(4,'EXECUTABLE_PREFIX = %s;', cfg.buildtarget.prefix)
 			xcode.PrintBuildSetting(4,'EXECUTABLE_PREFIX = '.. cfg.buildtarget.prefix .. ';', cfg)
 		end
 		
@@ -813,7 +813,7 @@
 		
 		local targetdir = path.getdirectory(cfg.buildtarget.bundlepath)
 		if targetdir ~= "." then
-		--	_p(4,'CONFIGURATION_BUILD_DIR = "$(SYMROOT)";');
+			--_p(4,'CONFIGURATION_BUILD_DIR = "$(SYMROOT)";');
 			xcode.PrintBuildSetting(4,'CONFIGURATION_BUILD_DIR = "$(SYMROOT)";', cfg);
 		end
 		
@@ -834,34 +834,34 @@
 		end
 		
 		if cfg.flags.NoRTTI then
-		--	_p(4,'GCC_ENABLE_CPP_RTTI = NO;')
+			--_p(4,'GCC_ENABLE_CPP_RTTI = NO;')
 			xcode.PrintBuildSetting( 4,'GCC_ENABLE_CPP_RTTI = NO;', cfg)
 		end
 		
 		if _ACTION ~= "xcode4" and cfg.flags.Symbols and not cfg.flags.NoEditAndContinue then
-		--	_p(4,'GCC_ENABLE_FIX_AND_CONTINUE = YES;')
+			--_p(4,'GCC_ENABLE_FIX_AND_CONTINUE = YES;')
 			xcode.PrintBuildSetting(4,'GCC_ENABLE_FIX_AND_CONTINUE = YES;', cfg)
 		end
 		
 		if cfg.flags.NoExceptions then
-		--	_p(4,'GCC_ENABLE_OBJC_EXCEPTIONS = NO;')
+			--_p(4,'GCC_ENABLE_OBJC_EXCEPTIONS = NO;')
 			xcode.PrintBuildSetting(4,'GCC_ENABLE_OBJC_EXCEPTIONS = NO;', cfg)
 		end
 		
 		if cfg.flags.Optimize or cfg.flags.OptimizeSize then
-		--	_p(4,'GCC_OPTIMIZATION_LEVEL = s;')
+			--_p(4,'GCC_OPTIMIZATION_LEVEL = s;')
 			xcode.PrintBuildSetting(4,'GCC_OPTIMIZATION_LEVEL = s;', cfg)
 		elseif cfg.flags.OptimizeSpeed then
 			--_p(4,'GCC_OPTIMIZATION_LEVEL = 3;')
 			xcode.PrintBuildSetting(4,'GCC_OPTIMIZATION_LEVEL = 3;', cfg)
 		else
-		--	_p(4,'GCC_OPTIMIZATION_LEVEL = 0;')
+			--_p(4,'GCC_OPTIMIZATION_LEVEL = 0;')
 			xcode.PrintBuildSetting(4,'GCC_OPTIMIZATION_LEVEL = 0;', cfg)
 		end
 		
 		if cfg.pchheader and not cfg.flags.NoPCH then
-	--		_p(4,'GCC_PRECOMPILE_PREFIX_HEADER = YES;')
-	--		_p(4,'GCC_PREFIX_HEADER = "%s";', cfg.pchheader)
+			--_p(4,'GCC_PRECOMPILE_PREFIX_HEADER = YES;')
+			--_p(4,'GCC_PREFIX_HEADER = "%s";', cfg.pchheader)
 			xcode.PrintBuildSetting(4,'GCC_PRECOMPILE_PREFIX_HEADER = YES;', cfg)
 			xcode.PrintBuildSetting(4,'GCC_PREFIX_HEADER = "' ..  cfg.pchheader .. '";', cfg)
 		end
@@ -888,7 +888,7 @@
 		--_p(4,'ONLY_ACTIVE_ARCH = %s;',iif(premake.config.isdebugbuild(cfg),'YES','NO'))
 
 		xcode.PrintBuildSetting(4,'OBJROOT = "' .. cfg.objectsdir .. '";', cfg)
-		xcode.PrintBuildSetting(4,'ONLY_ACTIVE_ARCH = NO;', cfg)
+		xcode.PrintBuildSetting(4,'ONLY_ACTIVE_ARCH = '..  iif(premake.config.isdebugbuild(cfg),'YES','NO')  ..';', cfg)
 		
 		-- build list of "other" C/C++ flags
 		local checks = {
@@ -923,12 +923,12 @@
 		end
 		
 		if targetdir ~= "." then
-		--	_p(4,'SYMROOT = "%s";', targetdir)
+			--_p(4,'SYMROOT = "%s";', targetdir)
 			xcode.PrintBuildSetting(4,'SYMROOT = "' .. targetdir .. '";', cfg)
 		end
 		
 		if cfg.flags.ExtraWarnings then
-	--		_p(4,'WARNING_CFLAGS = "-Wall";')
+			--_p(4,'WARNING_CFLAGS = "-Wall";')
 			xcode.PrintBuildSetting(4,'WARNING_CFLAGS = "-Wall";', cfg)
 		end
 			
