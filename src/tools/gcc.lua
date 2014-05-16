@@ -100,12 +100,13 @@
 		local flags = {}
 		
 		if not cfg.flags.Symbols then
+			-- OS X clang has another bug that cases a dead code elimination error so disable this hack again
 			-- OS X has a bug, see http://lists.apple.com/archives/Darwin-dev/2006/Sep/msg00084.html
-			if cfg.system == premake.MACOSX then
-				table.insert(flags, "-Wl,-x")
-			else
-				table.insert(flags, "-s")
-			end
+			--if cfg.system == premake.MACOSX then
+			--	table.insert(flags, "-Wl,-x")
+			--else
+			--	table.insert(flags, "-s")
+			--end
 		end
 		
 		if cfg.kind == premake.SHAREDLIB then
@@ -304,14 +305,14 @@
 
 	function premake.gcc.getldflags(cfg)
 		local result = { }
-		
+	        -- OS X clang has another bug related to dead code elmination, so disable this hack	
 		-- OS X has a bug, see http://lists.apple.com/archives/Darwin-dev/2006/Sep/msg00084.html
 		if not cfg.flags.Symbols then
-			if cfg.system == "macosx" then
-				table.insert(result, "-Wl,-x")
-			else
-				table.insert(result, "-s")
-			end
+		--	if cfg.system == "macosx" then
+		--		table.insert(result, "-Wl,-x")
+		--	else
+		--		table.insert(result, "-s")
+		--	end
 		end
 	
 		if cfg.kind == "SharedLib" then
